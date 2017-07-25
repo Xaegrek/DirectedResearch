@@ -9,12 +9,12 @@ import argparse
 import sys
 
 class Main(uInput,aAltitudeTarget, aFlyTime)
+
   def __init__(self, uInput,aAltitudeTarget, aFlyTime):
-    self.uInput = uInput
+    self.uInputLaunch = uInput
     self.aAltitudeTarget = aAltitudeTarget
     self.aFlyTime = aFlyTime
     self.UAVS = ""
-    self.uInputLaunch = "yes"
     
   def ConnectToUAV(self):
     while self.uInputLaunch == "":
@@ -92,9 +92,12 @@ class Main(uInput,aAltitudeTarget, aFlyTime)
     
 parser = argparse.ArgumentParser()
 parser.add_argument("-input", dest='uInput', type = str, help="whether to run simulated or real uav, 0 or 1", default = 1)
+parser.add_argument("-AT", dest='aAltitudeTarget', type = int, help="how high to fly, in meters", default = 10)
+parser.add_argument("-FT", dest='aFlyTime', type = int, help="how long to fly, in seconds", default = 10)            
 args = parser.parse_args()
-main = Main(args.uInput)
+main = Main(args.uInput, args.aAltitudeTarget, args.aFlyTime)
+
 try:
-            main.run()
+  main.run()
 except KeyboardInterrupt:
-            sys.exit()
+  sys.exit()
