@@ -8,8 +8,7 @@ from pymavlink import mavutil
 import argparse
 import sys
 
-class Main(uInput,aAltitudeTarget, aFlyTime)
-
+class Main:
   def __init__(self, uInput,aAltitudeTarget, aFlyTime):
     self.uInputLaunch = uInput
     self.aAltitudeTarget = aAltitudeTarget
@@ -72,8 +71,8 @@ class Main(uInput,aAltitudeTarget, aFlyTime)
 
     while not self.UAVS.armed: #todo should this attempt above steps after x tries?
       print("waiting for uav to change modes")
-      print("curront mode is", self.UAVS.mode.name
-      timep.sleep(1)
+      print("curront mode is", self.UAVS.mode.name)
+      time.sleep(1)
       print("uav is armed?:", self.UAVS.armed)
 
     print("taking off - stand clear")
