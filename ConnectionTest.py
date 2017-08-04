@@ -9,7 +9,8 @@ import argparse
 import sys
 
 class Main:
-  def __init__(self, uInput,aAltitudeTarget, aFlyTime):
+
+  def __init__(self, uInput, aAltitudeTarget, aFlyTime):
     self.uInputLaunch = uInput
     self.aAltitudeTarget = aAltitudeTarget
     self.aFlyTime = aFlyTime
@@ -40,28 +41,28 @@ class Main:
         description='Print out vehicle state information. Connects to SITL on local PC by default.')
       parser.add_argument('--connect', default='115200', help="vehicle connection target. Default '57600'")
       args = parser.parse_args()
-      self.UAVS = connect('/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00', baud=115200, rate=6)  #this line may need to be changed, specifically the /dev to a specific place, the rate, or teh baud rate
+      self.UAVS = connect('/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00', baud=57600, rate=6)  #this line may need to be changed, specifically the /dev to a specific place, the rate, or teh baud rate
 
     else:
-      print("invalid option")
+      print("invalid option, try another input")
 
   def TakeOff(self):
     print("starting basic prearm check")
     print(self.UAVS.mode.name)
 
-    if self.UAVS.modeiname == "INITIALISING":  #todo can this be done better
+    if self.UAVS.mode.name == "INITIALISING":  #todo can this be done better
       print("waiting for initialisation")
-      time.sleep(1)
-    while self.UAVS.gps_0.fix_type < 3:
-      print(self.UAVS.gps_0.fix_type, "satellites, waiting for more")
-      time.sleep(1)
+      time.sleep(3)
+    #while self.UAVS.gps_0.fix_type < 3:
+    #  print(self.UAVS.gps_0.fix_type, "satellites, waiting for more")
+    #  time.sleep(1)
     print("setting uav to guided mode")  #todo does this need to be done?
-    print("current mode is", gbavr.UAVS.mode.name)
+    print("current mode is", self.UAVS.mode.name)
     time.sleep(1)
 
-    while not self.UAVS.is_armable:  #todo can i make this attempt arm after x tries?
-      print("waiting for uav to be armable")
-      time.sleep(1)
+    #while not self.UAVS.is_armable:  #todo can i make this attempt arm after x tries?, waits for number of things, such asgps single, so useless if ignoring, unfortunatley
+     # print("waiting for uav to be armable")
+     # time.sleep(1)
 
     print("arming motors")
     time.sleep(0.5)
@@ -77,20 +78,24 @@ class Main:
 
     print("taking off - stand clear")
     time.sleep(4)
-    self.UAVS.simple_takeoff(aAltitudeTarget)
-    self.UAVS.flush()
-    time.sleep(aFlytime)
+   # self.UAVS.simple_takeoff(self.aAltitudeTarget)
+   # self.UAVS.flush()
+    time.sleep(self.aFlyTime)
 
+    print("beginning landing sequence")
     self.UAVS.mode = VehicleMode("LAND")
     self.UAVS.close()
     self.UAVS.flush()
     
   def run(self):
-    ConnectToUAV()
-    TakeOff()
+    self.ConnectToUAV()
+    self.UAVS.parameters['ARMING_CHECK'] = -9
+    time.sleep(5)
+    raw_input("press Enter to conitue")
+    self.TakeOff()
     
 parser = argparse.ArgumentParser()
-parser.add_argument("-input", dest='uInput', type = str, help="whether to run simulated or real uav, 0 or 1", default = 1)
+parser.add_argument("-input", dest='uInput', type = str, help="whether to run simulated or real uav, 0 or 1", default = "1")
 parser.add_argument("-AT", dest='aAltitudeTarget', type = int, help="how high to fly, in meters", default = 10)
 parser.add_argument("-FT", dest='aFlyTime', type = int, help="how long to fly, in seconds", default = 10)            
 args = parser.parse_args()
