@@ -36,7 +36,7 @@ def ConnectToUAV(self):
 		print("connecting to vehicle on %s") % connection_string
 		gVar.UAVS = connect(connection_string, wait_ready=True)
 
-	# live vehicle
+	# live vehicle, issues may come from plugging directly into pixhawk2
 	elif self.uInputLaunch == "1":
 		parser = argparse.ArgumentParser(
 			description='Print out vehicle state information. Connects to SITL on local PC by default.')
