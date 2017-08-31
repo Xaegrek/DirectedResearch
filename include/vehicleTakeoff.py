@@ -12,7 +12,7 @@ import argparse
 import sys
 
 
-def takeOff(self):
+def takeOff():
 	print("starting basic prearm check")
 	print(gVar.UAVS.mode.name)
 

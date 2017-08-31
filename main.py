@@ -17,8 +17,8 @@
 # ░     ▒ ░▒░ ░ ░ ░  ░░ ░▒  ░ ░ ▒ ░░ ░▒  ░ ░
 # ░       ░  ░░ ░   ░   ░  ░  ░   ▒ ░░  ░  ░
 # ░  ░  ░   ░  ░      ░   ░        ░
+from include import userControl
 from include import vehicleConnect
-from include import vehicleTakeoff
 from include import globalVariables as gVar
 
 from dronekit import *
@@ -39,9 +39,10 @@ class Main:
 		gVar.altitudeTarget = aAltitudeTarget
 		gVar.flyTime = aFlyTime
 		gVar.GPS = gps
+		# vehicleConnect.connectToUAV()
 
 	def run(self):
-
+		userControl.userInput()
 		return
 
 
