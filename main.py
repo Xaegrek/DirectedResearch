@@ -39,7 +39,7 @@ class Main:
 		gVar.altitudeTarget = aAltitudeTarget
 		gVar.flyTime = aFlyTime
 		gVar.GPS = gps
-		# vehicleConnect.connectToUAV()
+		vehicleConnect.connectToUAV()
 
 	def run(self):
 		userControl.userInput()
