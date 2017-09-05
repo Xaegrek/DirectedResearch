@@ -12,7 +12,7 @@ import argparse
 import sys
 
 def connectToUAV():
-	while gVar.uInputLaunch == "":
+	while gVar.InputLaunch == "":
 		time.sleep(1)
 	print("Starting attempt at SOLO Connection")
 
@@ -37,7 +37,7 @@ def connectToUAV():
 		gVar.UAVS = connect(connection_string, wait_ready=True)
 
 	# live vehicle, issues may come from plugging directly into pixhawk2
-	elif gVar.uInputLaunch == "1":
+	elif gVar.InputLaunch == "1":
 		parser = argparse.ArgumentParser(
 			description='Print out vehicle state information. Connects to SITL on local PC by default.')
 		parser.add_argument('--connect', default='57600', help="vehicle connection target. Default '57600'")  # 115200
