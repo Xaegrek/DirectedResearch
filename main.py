@@ -13,7 +13,6 @@ import sys
 import argparse
 import sys
 
-
 class Main:
 	def __init__(self, uInput, aAltitudeTarget, aFlyTime, gps):
 		gVar.inputLaunch = uInput
@@ -26,7 +25,7 @@ class Main:
 		userControl.userInput()
 		return
 
-
+# may want to rework how this works, though initilizing parameters could just be modified before full runtime
 parser = argparse.ArgumentParser()
 parser.add_argument("-input", dest='uInput', type=str, help="whether to run simulated or real uav, 0 or 1", default="1")
 parser.add_argument("-AT", dest='aAltitudeTarget', type=int, help="how high to fly, in meters", default=10)
