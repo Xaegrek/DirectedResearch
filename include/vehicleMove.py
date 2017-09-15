@@ -11,6 +11,9 @@ import sys
 import argparse
 import sys
 
+def vehicleStay():
+	time.sleep(gVar.flyTime)
+
 def vehicleMoveVelocity():
 	return
 

@@ -54,9 +54,4 @@ def takeOff():
 	time.sleep(4)
 	gVar.UAVS.simple_takeoff(gVar.altitudeTarget)
 	gVar.UAVS.flush()
-	time.sleep(gVar.flyTime)
 
-	print("beginning landing sequence")
-	gVar.UAVS.mode = VehicleMode("LAND")
-	gVar.UAVS.close()
-	gVar.UAVS.flush()

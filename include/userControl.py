@@ -3,7 +3,7 @@
 # implementiatn of algorithms still on this side
 
 from include import globalVariables as gVar
-from include import vehicleConnect, vehicleTakeoff
+from include import vehicleConnect, vehicleTakeoff, vehicleMove, vehicleReturn
 
 from dronekit import *
 from pymavlink import mavutil
@@ -20,5 +20,8 @@ from pathing import *
 
 # begin running stuff
 def userInput():
-	raw_input("press Enter to conitue")
+	raw_input("press Enter to Take Off")
 	vehicleTakeoff.takeOff()
+	# vehicleMove.vehicleStay()
+	raw_input("press Enter to Land")
+	vehicleReturn.vehicleLand()

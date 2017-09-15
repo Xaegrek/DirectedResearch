@@ -19,7 +19,16 @@ class Main:
 		gVar.altitudeTarget = aAltitudeTarget
 		gVar.flyTime = aFlyTime
 		gVar.GPS = gps
-		vehicleConnect.connectToUAV()
+		attempts = 0
+		totalAttempts = 3
+		while attempts < totalAttempts:
+			try:
+				vehicleConnect.connectToUAV()
+				break
+			except:
+				attempts +=1
+				print("Connection attempt #%s Failed, trying for %s total times.") % (attempts, totalAttempts)
+				time.sleep(0.5)
 
 	def run(self):
 		userControl.userInput()
