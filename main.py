@@ -20,7 +20,7 @@ class Main:
 		gVar.flyTime = aFlyTime
 		gVar.GPS = gps
 		attempts = 0
-		totalAttempts = 3
+		totalAttempts = 90
 		while attempts < totalAttempts:
 			try:
 				vehicleConnect.connectToUAV()
@@ -28,7 +28,7 @@ class Main:
 			except:
 				attempts +=1
 				print("Connection attempt #%s Failed, trying for %s total times.") % (attempts, totalAttempts)
-				time.sleep(1)
+				time.sleep(3)
 
 	def run(self):
 		userControl.userInput()
