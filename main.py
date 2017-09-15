@@ -28,7 +28,7 @@ class Main:
 			except:
 				attempts +=1
 				print("Connection attempt #%s Failed, trying for %s total times.") % (attempts, totalAttempts)
-				time.sleep(0.5)
+				time.sleep(1)
 
 	def run(self):
 		userControl.userInput()
