@@ -19,9 +19,11 @@ class Main:
 		gVar.altitudeTarget = aAltitudeTarget
 		gVar.flyTime = aFlyTime
 		gVar.GPS = gps
+
 		attempts = 0
 		totalAttempts = 900
-		vehicleConnect.connectToUAV(gVar.PX4ID0) # todo remoove
+
+		#vehicleConnect.connectToUAV(gVar.PX4ID0) # use this if connection problems
 		while attempts < totalAttempts:
 			try:
 				pixhawkID = eval('gVar.PX4ID{}'.format(attempts % gVar.PX4n))
