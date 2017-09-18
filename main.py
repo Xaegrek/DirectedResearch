@@ -23,10 +23,6 @@ class Main:
 		attempts = 0
 		totalAttempts = 900
 
-		print("Trying serial conection at: {}").format(attempts % gVar.PX4n)
-		pixhawkID = eval('gVar.PX4ID{}'.format(attempts % gVar.PX4n))
-		vehicleConnect.connectToUAV(pixhawkID)
-
 		#vehicleConnect.connectToUAV(gVar.PX4ID0) # use this if connection problems
 		while attempts < totalAttempts:
 			try:
