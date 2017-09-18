@@ -32,6 +32,9 @@ class Main:
 				time.sleep(3)
 		print("Temporarily Printing Attemept Number \n {} of {}").format(attempts, totalAttempts)
 	def run(self):
+		if gVar.UAVS == None:
+			print("No UAV Connected \n Ending Program")
+			sys.exit()
 		vehicleConnect.vehicleData()
 		userControl.userInput()
 		return
