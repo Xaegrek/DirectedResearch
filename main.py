@@ -34,7 +34,7 @@ class Main:
 				attempts +=1
 				print("Connection attempt #{} Failed, trying for {} total times.").format(attempts, totalAttempts)
 				time.sleep(3)
-		print("Temporarily Printing Attemept Number \n {} of {}").format(attempts, totalAttempts)
+
 	def run(self):
 		if gVar.UAVS == None:
 			print("No UAV Connected \n Ending Program")

@@ -11,3 +11,6 @@ Change it to 'ExecStart=-/sbin/agetty --noclear -a [username] %I $TERM
 
 To run a terminal at launch
 https://askubuntu.com/questions/756967/open-terminal-on-startup-and-run-command
+
+If UAV is not connecting, go to /dev/ and see if /serial/ is a directory there.  That is where it looks for the UAV ID to connect.
+If it is absent, reboot the uav with it unplugged from the PI, and let it sit for a moment before connecting it.
