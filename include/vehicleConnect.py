@@ -1,4 +1,3 @@
-usb-3D_Robotics_PX4_BL_FMU_v2.x_0-if00
 from include import globalVariables as gVar
 
 from dronekit import *
@@ -43,8 +42,9 @@ def connectToUAV():
 			description='Print out vehicle state information. Connects to SITL on local PC by default.')
 		parser.add_argument('--connect', default='57600', help="vehicle connection target. Default '57600'")  # 115200
 		args = parser.parse_args()
-		gVar.UAVS = connect('/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00', baud=57600,
+		gVar.UAVS = connect(gVar.PX4ID1, baud=57600,
 							rate=6)  # this line may need to be changed, specifically the /dev to a specific place, the rate, or teh baud rate
 
 	else:
 		print("invalid option, try another input")
+
