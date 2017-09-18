@@ -23,14 +23,16 @@ class Main:
 		totalAttempts = 90
 		while attempts < totalAttempts:
 			try:
-				vehicleConnect.connectToUAV()
+				pixhawkID = eval('gVar.PX4ID{}'.format(attempts % gVar.PX4n))
+				vehicleConnect.connectToUAV(pixhawkID)
 				break
 			except:
 				attempts +=1
-				print("Connection attempt #%s Failed, trying for %s total times.") % (attempts, totalAttempts)
+				print("Connection attempt #{} Failed, trying for {} total times.").format(attempts, totalAttempts)
 				time.sleep(3)
-
+		print("Temporarily Printing Attemept Number \n {} of {}").format(attempts, totalAttempts)
 	def run(self):
+		vehicleConnect.vehicleData()
 		userControl.userInput()
 		return
 
