@@ -21,7 +21,7 @@ class Main:
 		gVar.GPS = gps
 		attempts = 0
 		totalAttempts = 900
-		vehicleConnect.connectToUAV(gVar.PX4ID0)
+		vehicleConnect.connectToUAV(gVar.PX4ID0) # todo remoove
 		while attempts < totalAttempts:
 			try:
 				pixhawkID = eval('gVar.PX4ID{}'.format(attempts % gVar.PX4n))

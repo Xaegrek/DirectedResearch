@@ -18,10 +18,6 @@ def connectToUAV(pixhawkID):
 		time.sleep(1)
 	print("Starting attempt at SOLO Connection")
 
-	if gVar.GPS == False:
-		print("disabling GPS requirement")
-		gVar.UAVS.parameters['ARMING_CHECK'] = -9
-
 	# simulation vehicle, does not work on ARM processors
 	if gVar.inputLaunch == "0":
 		parser = argparse.ArgumentParser(
@@ -57,6 +53,10 @@ def connectToUAV(pixhawkID):
 
 	else:
 		print("invalid option, try another input")
+
+	if gVar.GPS == False:
+		print("disabling GPS requirement")
+		gVar.UAVS.parameters['ARMING_CHECK'] = -9
 
 def vehicleData():
 	gVar.UAVS.wait_ready('autopilot_version')
