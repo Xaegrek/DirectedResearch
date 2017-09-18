@@ -20,7 +20,7 @@ class Main:
 		gVar.flyTime = aFlyTime
 		gVar.GPS = gps
 		attempts = 0
-		totalAttempts = 90
+		totalAttempts = 900
 		while attempts < totalAttempts:
 			try:
 				pixhawkID = eval('gVar.PX4ID{}'.format(attempts % gVar.PX4n))
