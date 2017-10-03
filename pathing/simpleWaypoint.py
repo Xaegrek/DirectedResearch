@@ -22,5 +22,9 @@ def simpleArcWaypoint():
 	goal:
 		path and iterplotae set of GPS cooridanets
 def simpleRiskPath
-	takes gps position
-	coordinate risk map
+	takes:
+		gps position
+		coordinate risk map
+	goal:
+		path through heatmap using cost control analysis
+		likely use path interpolation
