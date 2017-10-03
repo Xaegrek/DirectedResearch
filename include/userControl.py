@@ -20,7 +20,10 @@ from pathing import *
 
 # begin running stuff
 def userInput():
-	raw_input("press Enter to Take Off")
+	while True:
+		i = raw_input("enter 'takeoff' to Takeoff")
+		if i == 'takeoff':
+			break
 	vehicleTakeoff.takeOff()
 	# vehicleMove.vehicleStay()
 	raw_input("press Enter to Land")
