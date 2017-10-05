@@ -106,3 +106,6 @@ def vehicleData():
 	print(" Mode: %s") % gVar.UAVS.mode.name    # settable
 	print(" Armed: %s") % gVar.UAVS.armed    # settable
 
+def infoGPS():
+	gVar.infoGPS = gVar.UAVS.GPSInfo
+

@@ -40,6 +40,7 @@ class Main:
 			print("No UAV Connected \n Ending Program")
 			sys.exit()
 		vehicleConnect.vehicleData()
+		print("Need to test units for local frame")
 		userControl.userInput()
 		return
 

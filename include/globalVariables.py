@@ -8,3 +8,17 @@ GPS = None
 PX4n = 2	# number of possible pixhawk id's, for more general control.  May switch it to autodetect in future
 PX4ID0 = '/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00'
 PX4ID1 = '/dev/serial/by-id/usb-3D_Robotics_PX4_BL_FMU_v2.x_0-if00'
+
+# Attitude, Position, Dynamics
+coordinatesGPS = None
+infoGPS = None
+coordinatesRel = None
+
+# Relative Coordinate Data Data
+a1 = [0,0,10] # north, east, alt
+b1 = [5,0,15]
+c1 = [10,5.15]
+d1 = [10,10,10]
+e1 = [10,0,10]
+f1 = [0,0,0]
+desiredPath1 = [a1,b1,c1,d1] #todo: assuming units are metres
