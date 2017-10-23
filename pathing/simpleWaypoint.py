@@ -10,6 +10,8 @@ import time
 import sys
 import argparse
 import sys
+from scipy import interpolate as intp
+
 def commandList():
 	# full list of coordiantes
 	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
@@ -34,19 +36,22 @@ def simpleWaypoint(path):
 	# 	current gps position
 	# goal:
 	# 	poth between set of GPS coordinates
-	for i in len(path):
+	for i in range(len(path)):
 		gVar.UAVS.simple_goto(path[i])
 		while gVar.UAVS.locations.local_frame != path[i]:
 			time.sleep(1)
 			print(gVar.UAVS.locations.local_frame)
 
-def simpleArcWaypoint():
+def simpleArcWaypoint(pathPTS):
 	# takes:
 	# 	current gps position
 	# goal:
 	# 	path and iterplotae set of GPS cooridanets
 	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
+	gVar.smooth_path1 = intp.SmoothBivariateSpline(pathPTS[0],pathPTS[1],pathPTS[2]) # todo have this variable number based on desired path
+	print(gVar.smooth_path1)
+
 def simpleRiskPath():
 	# takes:
 	# 	gps position
@@ -60,4 +65,7 @@ def simpleRiskPath():
 # Flight path to run
 def run():
 	gVar.UAVS.airspeed = 0.5  # m/s
-	simpleWaypoint(gVar.desiredPath1)
+	# simpleWaypoint(gVar.desiredPath1)
+	simpleArcWaypoint(gVar.desiredPath1)
+
+run

@@ -17,8 +17,10 @@ coordinatesRel = None
 # Relative Coordinate Data Data
 a1 = [0,0,10] # north, east, alt
 b1 = [5,0,15]
-c1 = [10,5.15]
+bc1 = [10,0,15]
+c1 = [10,5,15]
 d1 = [10,10,10]
 e1 = [10,0,10]
 f1 = [0,0,0]
-desiredPath1 = [a1,b1,c1,d1] #todo: assuming units are metres
+desiredPath1 = [a1,b1,bc1,c1,d1] #todo: assuming units are metres
+smoothPath1 = []

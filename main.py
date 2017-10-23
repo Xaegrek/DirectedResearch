@@ -12,6 +12,7 @@ import time
 import sys
 import argparse
 import sys
+import threading
 
 class Main:
 	def __init__(self, uInput, aAltitudeTarget, aFlyTime, gps):
