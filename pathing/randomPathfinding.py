@@ -16,7 +16,7 @@ import random
 
 def randomPather(area,rSeed):
 
-	
+
 
 	path = gVar.optimTrajectory
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
