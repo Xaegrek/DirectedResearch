@@ -1,4 +1,5 @@
 from include import globalVariables as gVar
+from include import vehicleMove
 
 from dronekit import *
 from pymavlink import mavutil
@@ -36,21 +37,21 @@ def simpleWaypoint(path):
 	# 	current gps position
 	# goal:
 	# 	poth between set of GPS coordinates
+	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
+	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
 	for i in range(len(path)):
-		gVar.UAVS.simple_goto(path[i])
-		while gVar.UAVS.locations.local_frame != path[i]:
-			time.sleep(1)
-			print(gVar.UAVS.locations.local_frame)
+		vehicleMove.vehicleMoveDistance(path[i],gVar.uSpeed)
 
-def simpleArcWaypoint(pathPTS):
+def simpleArcWaypoint(pathPTS):	#todo rewrite this to use vehicleMove and a second one to try using interpolation
 	# takes:
 	# 	current gps position
 	# goal:
 	# 	path and iterplotae set of GPS cooridanets
 	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
-	gVar.smooth_path1 = intp.SmoothBivariateSpline(pathPTS[0],pathPTS[1],pathPTS[2]) # todo have this variable number based on desired path
-	print(gVar.smooth_path1)
+	tPath = vehicleMove.simpleArcInterpolater(pathPTS)
+	for i in range(len(pathPTS)):
+		vehicleMove.vehicleMoveDistance(tPath[i],gVar.uSpeed)
 
 def simpleRiskPath():
 	# takes:
@@ -63,6 +64,7 @@ def simpleRiskPath():
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
 
 # Flight path to run
+# not being used
 def run():
 	gVar.UAVS.airspeed = 0.5  # m/s
 	# simpleWaypoint(gVar.desiredPath1)

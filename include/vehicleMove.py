@@ -1,5 +1,8 @@
 from include import globalVariables as gVar
 
+from scipy import interpolate as intp
+from scipy import linspace
+
 from dronekit import *
 from pymavlink import mavutil
 import droneapi
@@ -11,11 +14,34 @@ import sys
 import argparse
 import sys
 
+
 def vehicleStay():
 	time.sleep(gVar.flyTime)
 
 def vehicleMoveVelocity():
 	return
 
-def vehicleMoveDistance():
+def vehicleMoveDistance(pathPoint,speed):
+	gVar.UAVS.simple_goto(pathPoint,speed)
+	while gVar.UAVS.locations.local_frame != pathPoint
+		time.sleep(0.2)
 	return
+
+def simpleArcInterpolater(path):
+	# takes:
+	# 	current gps position
+	# goal:
+	# 	path and iterplotae set of GPS cooridanets
+	num_true_pts = 50
+	pathD = [[],[],[]]
+	smoothPath = []
+	for i in range(len(path)):
+		pathD[0].append(path[i][0])
+		pathD[1].append(path[i][1])
+		pathD[2].append(path[i][2])
+	tck, u = intp.splprep(pathD)
+	u_fine = linspace(0, 1, num_true_pts)
+	x_fine, y_fine, z_fine = intp.splev(u_fine, tck)
+	for i in range(len(x_fine)):
+		smoothPath.append([x_fine[i], y_fine[i], z_fine[i]])
+	return smoothPath

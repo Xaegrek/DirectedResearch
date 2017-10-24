@@ -4,6 +4,7 @@
 
 from include import globalVariables as gVar
 from include import vehicleConnect, vehicleTakeoff, vehicleMove, vehicleReturn
+from pathing import simpleWaypoint
 
 from dronekit import *
 from pymavlink import mavutil
@@ -26,5 +27,17 @@ def userInput():
 			break
 	vehicleTakeoff.takeOff()
 	# vehicleMove.vehicleStay()
+	print("01. desired path 1 test-script: max area of ~10*15*15, from corner")
+	print("02. desired path 1 test-script using curve interpolation: max area of ~10*15*15, from corner")
+	print("03. pathing equation using randomly generated fields")
+	gVar.launchCode = raw_input("Please enter the launch code for the desired script /n")
+	if '01' == gVar.launchCode:
+		simpleWaypoint.simpleWaypoint(gVar.desiredPath1)
+	elif '02' == gVar.launchCode:
+		simpleWaypoint.simpleArcWaypoint(gVar.desiredPath1)
+	elif '03' == gVar.launchCode:
+		print('still working on this')
+	else:
+		return
 	raw_input("press Enter to Land")
 	vehicleReturn.vehicleLand()
