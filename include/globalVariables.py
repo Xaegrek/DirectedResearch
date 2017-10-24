@@ -26,3 +26,6 @@ c1 = [10,5,15]
 d1 = [10,15,10]
 desiredPath1 = [a1,b1,bc1,c1,d1] #todo: assuming units are metres
 smoothPath1 = []
+
+# Trajectory Planning Variables
+optimTrajectory = []
