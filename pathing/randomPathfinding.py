@@ -15,7 +15,12 @@ from scipy import interpolate as intp
 import random
 
 def randomPather(area,rSeed):
-
+	# create a random grid of either distances which need to minimize travel to some point
+	# or random heat map/threat field to navigate.
+	# 2d for simplicity
+	# path should array of [x,y] points
+	# after array is found, should pass it to vehicleMove for each point
+	# likely will use djikstras
 
 
 	path = gVar.optimTrajectory
