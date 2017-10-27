@@ -15,6 +15,7 @@ from scipy import interpolate as intp
 import random
 
 def randomPather(area,rSeed):
+	#todo create a specifieable flight area dimensions (min/max height, +and- xandy spaces that either calibrates the coordinates to that scale or changes any value that breaks it to itself
 	# create a random grid of either distances which need to minimize travel to some point
 	# or random heat map/threat field to navigate.
 	# 2d for simplicity
