@@ -47,7 +47,7 @@ def skyBoxScale():
 
 	return
 
-def scalePath(path):	#todo this, right now i'll just have it fail on a bad shap
+def scalePath(path):	#todo this, right now i'll just have it fail on a bad shape
 
 	c = None
 	nb = 0
