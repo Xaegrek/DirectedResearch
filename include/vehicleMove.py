@@ -23,7 +23,8 @@ def vehicleMoveVelocity():
 
 def vehicleMoveDistance(pathPoint,speed):
 	gVar.UAVS.simple_goto(pathPoint,speed)
-	while gVar.UAVS.locations.local_frame != pathPoint
+	while gVar.UAVS.locations.local_frame != pathPoint:
+		gVar.posHistory.append([gVar.UAVS.locations.local_frame])
 		time.sleep(0.2)
 	return
 
@@ -45,3 +46,10 @@ def simpleArcInterpolater(path):
 	for i in range(len(x_fine)):
 		smoothPath.append([x_fine[i], y_fine[i], z_fine[i]])
 	return smoothPath
+
+def pathFollow(path):
+	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
+	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
+	for i in range(len(path)):
+		vehicleMoveDistance(path[i],gVar.uSpeed)
+	return

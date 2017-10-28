@@ -48,7 +48,7 @@ class Main:
 # may want to rework how this works, though initilizing parameters could just be modified before full runtime
 parser = argparse.ArgumentParser()
 parser.add_argument("-input", dest='uInput', type=str, help="whether to run simulated or real uav, 0 or 1", default="1")
-parser.add_argument("-AT", dest='aAltitudeTarget', type=int, help="how high to fly, in meters", default=10)
+parser.add_argument("-AT", dest='aAltitudeTarget', type=int, help="how high to fly, in meters", default=13)
 parser.add_argument("-FT", dest='aFlyTime', type=int, help="how long to fly, in seconds", default=10)
 parser.add_argument("-GPS", dest='gps', type=bool, help="Default True, False disables GPS check during startup", default=False)
 args = parser.parse_args()
