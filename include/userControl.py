@@ -85,7 +85,12 @@ def scalePath(path):	#todo this, right now i'll just have it fail on a bad shap
 # begin running stuff
 def userInput():
 	skyBoxScale()
+	print("current launch altitude set to %s m") % gVar.altitudeTarget
+	ua = raw_input("if you would like to change this, type 'yes'")
+	if ua == 'yes':
+		gVar.altitudeTarget = int(raw_input("what would you like the new altitude to be?"))
 	# vehicleMove.vehicleStay()
+	print("00. flies up to desired altitude, then immedietly lands")
 	print("01. desired path 1 test-script: max area of ~10*15*15, from corner")
 	print("02. desired path 1 test-script using curve interpolation: max area of ~10*15*15, from corner")
 	print("03. pathing equation using randomly generated fields")
@@ -98,6 +103,7 @@ def userInput():
 			gVar.desiredPathDJ = tempP.append(gVar.altitudeTarget)[i]
 	elif '02' == gVar.launchCode:
 		gVar.tdesiredPath = vehicleMove.simpleArcInterpolater(gVar.desiredPath1)
+
 	#scale path if out of bounds
 	if	gVar.launchCode == '01':
 		desiredPath =gVar.desiredPath1
@@ -133,7 +139,7 @@ def userInput():
 		return
 
 	#might comment this out for test, will see
-	raw_input("press Enter to Land")
+	# raw_input("press Enter to Land")
 	vehicleReturn.vehicleLand()
 
 	a= str(datetime.now())+'.txt'
