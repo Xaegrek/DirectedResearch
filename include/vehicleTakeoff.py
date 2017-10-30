@@ -51,6 +51,7 @@ def takeOff():
 		i += 1
 
 	print("taking off - stand clear")
+	print("target altitutude", gVar.altitudeTarget)
 	time.sleep(4)
 	gVar.UAVS.simple_takeoff(gVar.altitudeTarget)
 	gVar.UAVS.flush()

@@ -28,15 +28,15 @@ def skyBoxScale():
 	print("zmin is %s m; zmax is %s m") % (gVar.skyBox[0], gVar.skyBox[1])
 	print("north min is %s m, north max is %s m") % (gVar.skyBox[2], gVar.skyBox[3])
 	print("east min is %s m, east max is %s m") % (gVar.skyBox[4], gVar.skyBox[5])
-	check = raw_input("To change these values, enter 'modify'")
+	check = raw_input("To change these values, enter 'modify': ")
 	x = []
 	if check == 'modify':
-		x[0] = raw_input("new zmin value:")
-		x[1] = raw_input("new zmax value:")
-		x[2] = raw_input("new north min value:")
-		x[3] = raw_input("new north max value:")
-		x[4] = raw_input("new east min value:")
-		x[5] = raw_input("new east max value:")
+		x[0] = raw_input("new zmin value: ")
+		x[1] = raw_input("new zmax value: ")
+		x[2] = raw_input("new north min value: ")
+		x[3] = raw_input("new north max value: ")
+		x[4] = raw_input("new east min value: ")
+		x[5] = raw_input("new east max value: ")
 		for i in range(len(x)):
 			if x[i]:
 				gVar.skyBox[i] = x[i]
@@ -86,17 +86,22 @@ def scalePath(path):	#todo this, right now i'll just have it fail on a bad shape
 def userInput():
 	skyBoxScale()
 	print("current launch altitude set to %s m") % gVar.altitudeTarget
-	ua = raw_input("if you would like to change this, type 'yes'")
+	ua = raw_input("if you would like to change this, type 'yes': ")
 	if ua == 'yes':
-		gVar.altitudeTarget = int(raw_input("what would you like the new altitude to be?"))
-	# vehicleMove.vehicleStay()
+		gVar.altitudeTarget = int(raw_input("what would you like the new altitude to be?: "))
+	ua = None
+	ua = raw_input("Type 'yes' to disable GPS requirement: ")
+	if ua == 'yes':
+		gVar.GPS = False
+		print("GPS Disablede, \nbe cautious of flight\n\n\n")
+
 	print("00. flies up to desired altitude, then immedietly lands")
 	print("01. desired path 1 test-script: max area of ~10*15*15, from corner")
 	print("02. desired path 1 test-script using curve interpolation: max area of ~10*15*15, from corner")
 	print("03. pathing equation using randomly generated fields")
-	gVar.launchCode = raw_input("Please enter the launch code for the desired script /n")
+	gVar.launchCode = raw_input("Please enter the launch code for the desired script: \n")
 	if '03' == gVar.launchCode:
-		gVar.N_G = raw_input("How large should the grid be")
+		gVar.N_G = int(raw_input("How large should the grid be, basicall in metres: "))
 		print("planning path")
 		tempP= dj.coorDjik(gVar.N_G)
 		for i in range(len(tempP)):
@@ -107,13 +112,13 @@ def userInput():
 	#scale path if out of bounds
 	if	gVar.launchCode == '01':
 		desiredPath =gVar.desiredPath1
-		scalePath(desiredPath)
+		#scalePath(desiredPath)
 	elif gVar.launchCode == '02':
 		desiredPath =gVar.tdesiredPath
-		scalePath(desiredPath)
+		#scalePath(desiredPath)
 	elif gVar.launchCode == '03':
 		desiredPath =gVar.desiredPathDJ
-		scalePath(desiredPath)
+		#scalePath(desiredPath)
 	else:
 		desiredPath = [0,0,gVar.altitudeTarget]
 
@@ -122,10 +127,12 @@ def userInput():
 
 	#Flight begins
 	while True:
-		i = raw_input("enter 'takeoff' to Takeoff")
+		i = raw_input("enter 'takeoff' to Takeoff: ")
 		if i == 'takeoff' and gVar.kill == False:
 			break
 	vehicleTakeoff.takeOff()
+	print(gVar.UAVS.location.local_frame)
+	print(gVar.UAVS.location.global_relative_frame)
 
 	if '01' == gVar.launchCode:
 		vehicleMove.pathFollow(desiredPath)
@@ -135,6 +142,7 @@ def userInput():
 		vehicleMove.pathFollow(desiredPath)
 	elif '00' == gVar.launchCode:
 		print("up and down as an intro case")
+		time.sleep(25)
 	else:
 		return
 
@@ -143,6 +151,9 @@ def userInput():
 	vehicleReturn.vehicleLand()
 
 	a= str(datetime.now())+'.txt'
-	f = open(a,'w')
-	f.write(('desired path',desiredPath,'actual path', gVar.posHistory))
+	f = open(a,'a')
+	f.write('desired path')
+	f.write(str(desiredPath))
+	f.write('actual path')
+	f.write(str(gVar.posHistory))
 	f.close()

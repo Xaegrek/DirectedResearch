@@ -1,4 +1,4 @@
-import scipy as sp
+import numpy as sp
 import time
 
 ############### todo rewrite and learn how this works
@@ -221,8 +221,8 @@ def pathToCoordinates(path,gridPoints):
 		pathCoordinates.append(coord)
 	return pathCoordinates
 
-def run():
-	N_G = 12  # corresponds to grid size
+def run(N_G):
+	# N_G = 5  # corresponds to grid size
 	threat_value_true = threatField(N_G)
 	graph = pathingBoundaries(N_G, threat_value_true)
 	grap = Digraph()
@@ -237,5 +237,5 @@ def run():
 	coor = pathToCoordinates(p,N_G)
 	print(p)
 	print(coor)
-run()
+run(5)
 #\

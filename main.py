@@ -35,8 +35,9 @@ class Main:
 				attempts +=1
 				print("Connection attempt #{} Failed, trying for {} total times.").format(attempts, totalAttempts)
 				time.sleep(3)
-
+			print('not great break')
 	def run(self):
+		print('connected')
 		if gVar.UAVS == None:
 			print("No UAV Connected \n Ending Program")
 			sys.exit()
@@ -50,11 +51,16 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-input", dest='uInput', type=str, help="whether to run simulated or real uav, 0 or 1", default="1")
 parser.add_argument("-AT", dest='aAltitudeTarget', type=int, help="how high to fly, in meters", default=13)
 parser.add_argument("-FT", dest='aFlyTime', type=int, help="how long to fly, in seconds", default=10)
-parser.add_argument("-GPS", dest='gps', type=bool, help="Default True, False disables GPS check during startup", default=False)
+parser.add_argument("-GPS", dest='gps', type=bool, help="Default True, False disables GPS check during startup", default=True)
 args = parser.parse_args()
 main = Main(args.uInput, args.aAltitudeTarget, args.aFlyTime, args.gps)
 
 try:
 	main.run()
 except KeyboardInterrupt:
+	gVar.UAVS.mode = VehicleMode("LAND")
+#	gVar.UAVS.mode = VehicleMode("RTL")
+	print("failure detected, returning to home")
+	time.sleep(180)
+	gVar.UAVS.close()
 	sys.exit()

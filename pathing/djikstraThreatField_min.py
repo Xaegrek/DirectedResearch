@@ -1,4 +1,4 @@
-import scipy as sp
+import numpy as sp
 import time
 
 ############### todo rewrite and learn how this works
