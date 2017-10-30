@@ -163,6 +163,7 @@ def pathingBoundaries(N_G, threat_value_true): #todo create version which connec
 	N_Gt = N_G
 	for n in range(1, N_G ** 2 + 1):
 		nt = n - 1
+		print(nt,N_Gt)
 		if n / N_G <= 1:  # bottom of grid
 			A[nt, nt + N_Gt] = 1
 			A[nt + N_Gt, nt] = 1
