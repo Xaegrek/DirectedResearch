@@ -82,12 +82,10 @@ class threat_bd:
 
 def calc_basis_value(threat_basis_data, posn):
 	H_measurement = sp.zeros((len(posn[0]), threat_basis_data.n_threat_parameters))
-	print(posn)
-	print(threat_basis_data.basis_parameters.var)
+
 	for m1 in range(len(posn[0])):
 		posn_vec = posn[0, m1] * sp.ones(threat_basis_data.n_threat_parameters), \
 				   posn[1, m1] * sp.ones(threat_basis_data.n_threat_parameters)
-		print(posn_vec)  # todo remove
 
 		H_measurement[m1, :] = sp.multiply((1 / sp.sqrt(2.0 * sp.pi * (threat_basis_data.basis_parameters.var) ** 2)),
 										   sp.exp(
@@ -138,7 +136,7 @@ def threatField(N_G):
 							  - 0.5341, 1.9278, - 0.1762, - 0.2438]
 
 	n_center_rows = int(sp.sqrt(threat_basis_data.n_threat_parameters))
-	center_spacing = 2 / (n_center_rows + 1)
+	center_spacing = 2.0 / (n_center_rows + 1)
 
 	# Constants \bar{x}_n and \bar{y}_n in the expression for threat field
 	threat_basis_data.basis_parameters.mean = sp.zeros((2, threat_basis_data.n_threat_parameters))
@@ -150,7 +148,7 @@ def threatField(N_G):
 
 	# Constants \nu_n in the expression for threat field
 	threat_basis_data.basis_parameters.var = float((1.25 * center_spacing) ** 2)  # This is \sigma^2_\Psi
-
+	print(threat_basis_data.basis_parameters.var)
 	# Constant c_offset in the expression for threat field
 	threat_basis_data.offset = 3
 
