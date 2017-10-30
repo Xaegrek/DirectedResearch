@@ -50,7 +50,7 @@ def takeOff():
 			sys.exit("Did not arm within 10 seconds, check UAV")
 		i += 1
 
-	print("taking off - stand clear")
+	print("taking off - stand clear: altitude", gVar.altitudeTarget)
 	print("target altitutude", gVar.altitudeTarget)
 	time.sleep(4)
 	gVar.UAVS.simple_takeoff(gVar.altitudeTarget)

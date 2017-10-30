@@ -89,6 +89,7 @@ def userInput():
 	ua = raw_input("if you would like to change this, type 'yes': ")
 	if ua == 'yes':
 		gVar.altitudeTarget = int(raw_input("what would you like the new altitude to be?: "))
+		print(gVar.altitudeTarget)
 	ua = None
 	ua = raw_input("Type 'yes' to disable GPS requirement: ")
 	if ua == 'yes':
@@ -150,7 +151,7 @@ def userInput():
 	# raw_input("press Enter to Land")
 	vehicleReturn.vehicleLand()
 
-	a= str(datetime.now())+'.txt'
+	a= str(time.time())+'.txt'
 	f = open(a,'a')
 	f.write('desired path')
 	f.write(str(desiredPath))
