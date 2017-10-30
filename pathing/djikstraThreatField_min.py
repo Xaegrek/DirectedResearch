@@ -82,14 +82,16 @@ class threat_bd:
 
 def calc_basis_value(threat_basis_data, posn):
 	H_measurement = sp.zeros((len(posn[0]), threat_basis_data.n_threat_parameters))
-
+	print(posn_vec)	#todo remove
+	print(posn)
+	print(threat_basis_data.basis_parameters.var)
 	for m1 in range(len(posn[0])):
 		posn_vec = posn[0, m1] * sp.ones(threat_basis_data.n_threat_parameters), \
 				   posn[1, m1] * sp.ones(threat_basis_data.n_threat_parameters)
 
-		H_measurement[m1, :] = sp.multiply((1 / sp.sqrt(2 * sp.pi * (threat_basis_data.basis_parameters.var) ** 2)),
+		H_measurement[m1, :] = sp.multiply((1 / sp.sqrt(2.0 * sp.pi * (threat_basis_data.basis_parameters.var) ** 2)),
 										   sp.exp(
-											   sp.multiply((-1 / (2 * (threat_basis_data.basis_parameters.var) ** 2)),
+											   sp.multiply((-1 / (2.0 * (threat_basis_data.basis_parameters.var) ** 2)),
 														   (sp.square(
 															   posn_vec[0] - threat_basis_data.basis_parameters.mean[
 																   0]) +
@@ -147,7 +149,7 @@ def threatField(N_G):
 				 -1 + m2 * center_spacing]
 
 	# Constants \nu_n in the expression for threat field
-	threat_basis_data.basis_parameters.var = (1.25 * center_spacing) ** 2  # This is \sigma^2_\Psi
+	threat_basis_data.basis_parameters.var = float((1.25 * center_spacing) ** 2)  # This is \sigma^2_\Psi
 
 	# Constant c_offset in the expression for threat field
 	threat_basis_data.offset = 3
@@ -236,3 +238,6 @@ def coorDjik(N_G):
 	[v, p] = grap.min_path(0,N_G**2-1) # v is path cost, p is path from a to b
 	coor = pathToCoordinates(p,N_G)
 	return coor
+
+c = coorDjik(5)
+print(c)
