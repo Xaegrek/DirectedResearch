@@ -27,5 +27,5 @@ def randomPather(area,rSeed):
 	path = gVar.optimTrajectory
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
 	for i in range(len(path)):
-		vehicleMove.vehicleMoveDistance(path[i],gVar.uSpeed)
+		vehicleMove.vehicleMoveDistancet(path[i], gVar.uSpeed)
 	return

@@ -21,13 +21,33 @@ def vehicleStay():
 def vehicleMoveVelocity():
 	return
 
-def vehicleMoveDistance(pp,speed):
-	pathPoint = LocationGlobalRelative(pp[0],pp[1],pp[2])
+def vehicleMoveDistancet(pp, speed): #time based run
+	pathPoint = LocationGlobalRelative(pp[0],pp[1],pp[2]) #todo or make this LocationLocal(dn,de,-dz)
 	gVar.UAVS.simple_goto(pathPoint,speed)
-	while gVar.UAVS.location.local_frame != pp:
+	u=time.time()
+	un = u+5
+	while u< un:
 		gVar.posHistory.append([gVar.UAVS.location.local_frame])
+		print(gVar.UAVS.location.global_relative_frame)
 		time.sleep(0.2)
+		u=time.time()
 	return
+
+def vehicleMoveDistanced(pp,speed):
+	currentLocation = gVar.UAVS.location.global_relative_frame
+	targetLocation = get_location_metres(currentLocation, pp[0], pp[1])
+	targetDistance = get_distance_metres(currentLocation, targetLocation)
+
+	gVar.UAVS.simple_goto(targetLocation,speed)
+
+	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
+		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)
+		print("Distance to target: ", remainingDistance)
+		gVar.posHistory.append([gVar.UAVS.location.local_frame])
+		if remainingDistance <= targetDistance * 0.01:  # Just below target, in case of undershoot.
+			print("Reached target")
+			break
+		time.sleep(1)
 
 def simpleArcInterpolater(path):
 	# takes:
@@ -52,5 +72,5 @@ def pathFollow(path):
 	gVar.coordinatesGPS = gVar.UAVS.location.global_relative_frame
 	gVar.coordinatesRel = gVar.UAVS.location.local_frame
 	for i in range(len(path)):
-		vehicleMoveDistance(path[i],gVar.uSpeed)
+		vehicleMoveDistancet(path[i], gVar.uSpeed)
 	return

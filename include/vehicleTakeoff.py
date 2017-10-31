@@ -54,5 +54,14 @@ def takeOff():
 	print("target altitutude", gVar.altitudeTarget)
 	time.sleep(4)
 	gVar.UAVS.simple_takeoff(gVar.altitudeTarget)
+	# Wait until the vehicle reaches a safe height before processing the goto (otherwise the command
+	#  after Vehicle.simple_takeoff will execute immediately).
+	while True:
+		print(" Altitude: ", gVar.UAVS.location.global_relative_frame.alt)
+		# Break and return from function just below target altitude.
+		if gVar.UAVS.location.global_relative_frame.alt >= gVar.altitudeTarget * 0.95:
+			print("Reached target altitude")
+			break
+		time.sleep(1)
 	gVar.UAVS.flush()
 

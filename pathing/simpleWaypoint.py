@@ -40,7 +40,7 @@ def simpleWaypoint(path):
 	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
 	for i in range(len(path)):
-		vehicleMove.vehicleMoveDistance(path[i],gVar.uSpeed)
+		vehicleMove.vehicleMoveDistancet(path[i], gVar.uSpeed)
 
 def simpleArcWaypoint(pathPTS):	#todo rewrite this to use vehicleMove and a second one to try using interpolation
 	# takes:
@@ -50,7 +50,7 @@ def simpleArcWaypoint(pathPTS):	#todo rewrite this to use vehicleMove and a seco
 	gVar.coordinatesGPS = gVar.UAVS.locations.global_relative_frame
 	gVar.coordinatesRel = gVar.UAVS.locations.local_frame
 	for i in range(len(pathPTS)):
-		vehicleMove.vehicleMoveDistance(pathPTS[i],gVar.uSpeed)
+		vehicleMove.vehicleMoveDistancet(pathPTS[i], gVar.uSpeed)
 
 def simpleRiskPath():
 	# takes:
