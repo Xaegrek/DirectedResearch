@@ -179,6 +179,7 @@ def pathingBoundaries(N_G, threat_value_true): #todo create version which connec
 				A[nt + 1, nt] = 1
 				A[nt, nt + 1] = 1
 		elif sp.ceil(n / N_G) == N_G:  # top of grid
+			print(sp.ceil(n / N_G), 'ciel')
 			A[nt, nt - N_Gt] = 1
 			A[nt - N_Gt, nt] = 1
 			if n % N_G == 0:  # right top of grid
@@ -198,6 +199,7 @@ def pathingBoundaries(N_G, threat_value_true): #todo create version which connec
 		elif n % N_G == 1:  # left of grid
 			print('left',n % N_G)
 			print('left, vect',nt+1)
+			print(sp.ceil(n / N_G), 'ciel')
 			A[nt + 1, nt] = 1
 			A[nt, nt + 1] = 1
 			A[nt, nt + N_Gt] = 1
