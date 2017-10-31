@@ -1,7 +1,7 @@
 from include import globalVariables as gVar
 
-from scipy import interpolate as intp
-from scipy import linspace
+from numpy import interp as intp
+from numpy import linspace
 
 from dronekit import *
 from pymavlink import mavutil
