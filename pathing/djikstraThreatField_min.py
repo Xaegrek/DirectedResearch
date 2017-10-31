@@ -196,6 +196,8 @@ def pathingBoundaries(N_G, threat_value_true): #todo create version which connec
 			A[nt, nt + N_Gt] = 1
 			A[nt, nt - N_Gt] = 1
 		elif n % N_G == 1:  # left of grid
+			print('left',n % N_G)
+			print('left, vect',nt+1)
 			A[nt + 1, nt] = 1
 			A[nt, nt + 1] = 1
 			A[nt, nt + N_Gt] = 1
