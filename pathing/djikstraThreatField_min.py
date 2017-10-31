@@ -163,12 +163,6 @@ def pathingBoundaries(N_G, threat_value_true): #todo create version which connec
 	N_Gt = N_G
 	for n in range(1, N_G ** 2 + 1):
 		nt = n - 1
-		print(n,N_G,'n')
-		print(nt,N_G,'nt')
-		print(n%N_G,'mod')
-		print('left mod', n % N_G)
-		print('left, vect', nt + 1)
-		print(sp.ceil(float(n) / N_G), 'ciel',float(n) / N_G,n,N_G)
 		if n / N_G <= 1:  # bottom of grid
 			A[nt, nt + N_Gt] = 1
 			A[nt + N_Gt, nt] = 1
@@ -243,5 +237,5 @@ def coorDjik(N_G):
 	coor = pathToCoordinates(p,N_G)
 	return coor
 
-c = coorDjik(5)
-print(c)
+# c = coorDjik(5)
+# print(c)
