@@ -11,7 +11,7 @@ import time
 import sys
 import argparse
 import sys
-from scipy import interpolate as intp
+from numpy import interp as intp
 import random
 
 def randomPather(area,rSeed):
