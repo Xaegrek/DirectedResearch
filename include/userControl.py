@@ -96,28 +96,41 @@ def userInput():
 		gVar.GPS = False
 		print("GPS Disablede, \nbe cautious of flight\n\n\n")
 
-	print("00. flies up to desired altitude, then immedietly lands")
-	print("01. desired path 1 test-script: max area of ~10*15*15, from corner")
-	print("02. desired path 1 test-script using curve interpolation: max area of ~10*15*15, from corner")
-	print("03. pathing equation using randomly generated fields")
+	t0 = '00' # altitude hold
+	t1 = '01' # designed path, timed travel (simple)
+	t2 = '02' # designed path, confirms distance to target before switching points
+	t3 = '03' # designed path, sends NED mavlink messages
+	t4  = '04' # desigend path, interpolate and confirm distance
+	t5 = '04' # paths using djikstra and confirming distances
+
+	print("%s. flies up to desired altitude, then lands after a few moments") % t0
+	print("%s. desired path 1 test-script: timer for each maneuver") % t1
+	print("%s. desired path 1 test-script: checks distance to each target") % t2
+	print("%s. desired path 1 test-script: sends mavlink messages") % t3
+	print("%s. desired path 1 test-script: interpolate path and check distance to target")
+	print("%s. pathing using djikstra") % t5
 	gVar.launchCode = raw_input("Please enter the launch code for the desired script: \n")
-	if '03' == gVar.launchCode:
+	if t5 == gVar.launchCode:
 		gVar.N_G = int(raw_input("How large should the grid be, basicall in metres: "))
 		print("planning path")
 		tempP= dj.coorDjik(gVar.N_G)
 		for i in range(len(tempP)):
 			gVar.desiredPathDJ = tempP.append(gVar.altitudeTarget)[i]
-	elif '02' == gVar.launchCode:
+	elif t4 == gVar.launchCode:
 		gVar.tdesiredPath = vehicleMove.simpleArcInterpolater(gVar.desiredPath1)
 
 	#scale path if out of bounds
-	if	gVar.launchCode == '01':
+	if	gVar.launchCode == t1:
 		desiredPath =gVar.desiredPath1
 		#scalePath(desiredPath)
-	elif gVar.launchCode == '02':
-		desiredPath =gVar.tdesiredPath
+	elif gVar.launchCode == t2:
+		desiredPath =gVar.desiredPath1
 		#scalePath(desiredPath)
-	elif gVar.launchCode == '03':
+	elif gVar.launchCode == t3:
+		desiredPath = gVar.desiredPath1
+	elif gVar.launchCode == t4:
+		desiredPath = gVar.tdesiredPath
+	elif gVar.launchCode == t5:
 		desiredPath =gVar.desiredPathDJ
 		#scalePath(desiredPath)
 	else:
@@ -135,15 +148,19 @@ def userInput():
 	print(gVar.UAVS.location.local_frame)
 	print(gVar.UAVS.location.global_relative_frame)
 
-	if '01' == gVar.launchCode:
-		vehicleMove.pathFollow(desiredPath)
-	elif '02' == gVar.launchCode:
-		vehicleMove.pathFollow(desiredPath)
-	elif '03' == gVar.launchCode:
-		vehicleMove.pathFollow(desiredPath)
-	elif '00' == gVar.launchCode:
+	if t1 == gVar.launchCode:
+		vehicleMove.pathFollowt(desiredPath)
+	elif t2 == gVar.launchCode:
+		vehicleMove.pathFollowd(desiredPath)
+	elif t3 == gVar.launchCode:
+		vehicleMove.pathFollowMav(desiredPath)
+	elif t4 == gVar.launchCode:
+		vehicleMove.pathFollowd(desiredPath)
+	elif t5 == gVar.launchCode:
+		vehicleMove.pathFollowd(desiredPath)
+	elif t0 == gVar.launchCode:	# go to altitude and then land
 		print("up and down as an intro case")
-		time.sleep(25)
+		time.sleep(10)
 	else:
 		return
 
@@ -157,4 +174,8 @@ def userInput():
 	f.write(str(desiredPath))
 	f.write('actual path')
 	f.write(str(gVar.posHistory))
+	f.write('actual (gps) path')
+	f.write(str(gVar.poshistoryGPS))
 	f.close()
+
+	print("closed up")
