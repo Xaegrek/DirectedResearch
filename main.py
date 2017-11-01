@@ -59,6 +59,7 @@ try:
 	main.run()
 except KeyboardInterrupt:
 	gVar.UAVS.mode = VehicleMode("LAND")
+	gVar.UAVS.flush()
 #	gVar.UAVS.mode = VehicleMode("RTL")
 	print("failure detected, returning to home")
 	time.sleep(180)

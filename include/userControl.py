@@ -107,7 +107,7 @@ def userInput():
 	print("%s. desired path 1 test-script: timer for each maneuver") % t1
 	print("%s. desired path 1 test-script: checks distance to each target") % t2
 	print("%s. desired path 1 test-script: sends mavlink messages") % t3
-	print("%s. desired path 1 test-script: interpolate path and check distance to target")
+	print("%s. desired path 1 test-script: interpolate path and check distance to target") % t4
 	print("%s. pathing using djikstra") % t5
 	gVar.launchCode = raw_input("Please enter the launch code for the desired script: \n")
 	if t5 == gVar.launchCode:

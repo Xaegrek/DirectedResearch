@@ -45,8 +45,10 @@ def vehicleMoveVelocity():
 def vehicleMoveDistancet(pp, speed): #time based run
 	pathPoint = LocationGlobalRelative(pp[0],pp[1],pp[2]) #todo or make this LocationLocal(dn,de,-dz)
 	gVar.UAVS.simple_goto(pathPoint,speed)
+	gVar.UAVS.flush()
 	u=time.time()
 	un = u+5
+	print(gVar.UAVS.location.local_frame)
 	while u< un:
 		gVar.posHistory.append([gVar.UAVS.location.local_frame])
 		print(gVar.UAVS.location.global_relative_frame)
@@ -82,7 +84,9 @@ def vehicleMoveDistanced(pp,speed):
 	targetDistance = get_distance_metres(currentLocation, targetLocation)
 
 	gVar.UAVS.simple_goto(targetLocation,speed)
+	gVar.UAVS.flush()
 
+	print('targetLocation:', targetLocation, 'currentLocation', currentLocation)
 	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
 		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)
 		print("Distance to target: ", remainingDistance)
@@ -114,6 +118,7 @@ def vehicleMoveDistanceMav(pp,speed):
 		0, 0)  # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)
 	# send command to vehicle
 	gVar.UAVS.send_mavlink(msg)
+	gVar.UAVS.flush()
 
 	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
 		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)
