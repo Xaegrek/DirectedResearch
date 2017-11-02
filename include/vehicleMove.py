@@ -45,13 +45,14 @@ def vehicleMoveVelocity():
 def vehicleMoveDistancet(pp, speed): #time based run
 	pathPoint = LocationGlobalRelative(pp[0],pp[1],pp[2]) #todo or make this LocationLocal(dn,de,-dz)
 	gVar.UAVS.simple_goto(pathPoint,speed)
-	gVar.UAVS.flush()
+	gVar.UAVS.commands.upload()
+
 	u=time.time()
 	un = u+5
 	print(gVar.UAVS.location.local_frame)
 	while u< un:
-		gVar.posHistory.append([gVar.UAVS.location.local_frame])
-		print(gVar.UAVS.location.global_relative_frame)
+		gVar.posHistory.append([gVar.UAVS.location.local_frame.north, gVar.UAVS.location.local_frame.east, gVar.UAVS.location.local_frame.down])
+		print(gVar.UAVS.location.global_relative_frame.lat, gVar.UAVS.location.global_relative_frame.lon,gVar.UAVS.location.global_relative_frame.alt)
 		time.sleep(0.2)
 		u=time.time()
 	return
@@ -84,12 +85,12 @@ def vehicleMoveDistanced(pp,speed):
 	targetDistance = get_distance_metres(currentLocation, targetLocation)
 
 	gVar.UAVS.simple_goto(targetLocation,speed)
-	gVar.UAVS.flush()
+	gVar.UAVS.commands.upload()
 
-	print('targetLocation:', targetLocation, 'currentLocation', currentLocation)
+	print('targetLocation:', targetLocation.lat, targetLocation.lon, targetLocation.alt, 'currentLocation', currentLocation.lat, currentLocation.lon, currentLocation.alt)
 	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
 		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)
-		print("Distance to target: ", remainingDistance)
+		print("Distance to target: ", remainingDistance,"target distance",targetDistance)
 		gVar.posHistory.append([gVar.UAVS.location.local_frame])
 		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame])
 		if remainingDistance <= targetDistance * 0.01:  # Just below target, in case of undershoot.
@@ -118,7 +119,7 @@ def vehicleMoveDistanceMav(pp,speed):
 		0, 0)  # yaw, yaw_rate (not supported yet, ignored in GCS_Mavlink)
 	# send command to vehicle
 	gVar.UAVS.send_mavlink(msg)
-	gVar.UAVS.flush()
+	gVar.UAVS.commands.upload()
 
 	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
 		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)

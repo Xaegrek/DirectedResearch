@@ -168,6 +168,7 @@ def userInput():
 	# raw_input("press Enter to Land")
 	vehicleReturn.vehicleLand()
 
+	#  #todo rewrite this for global Variable, so it write while it works
 	a= str(time.time())+'.txt'
 	f = open(a,'a')
 	f.write('desired path')

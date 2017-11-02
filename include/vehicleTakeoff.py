@@ -38,7 +38,7 @@ def takeOff():
 	time.sleep(0.5)
 	gVar.UAVS.mode = VehicleMode("GUIDED")
 	gVar.UAVS.armed = True
-	gVar.UAVS.flush()
+	gVar.UAVS.commands.upload()
 
 	i=0
 	while not gVar.UAVS.armed:
@@ -54,7 +54,8 @@ def takeOff():
 	print("target altitutude", gVar.altitudeTarget)
 	time.sleep(4)
 	gVar.UAVS.simple_takeoff(gVar.altitudeTarget)
-	gVar.UAVS.flush()
+	gVar.UAVS.commands.upload()
+
 	# Wait until the vehicle reaches a safe height before processing the goto (otherwise the command
 	#  after Vehicle.simple_takeoff will execute immediately).
 	while True:
