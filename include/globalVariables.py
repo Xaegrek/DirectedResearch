@@ -25,11 +25,11 @@ skyBox = []
 
 # Relative Coordinate Data Data
 a1 = [0,0,15] # north, east, alt
-b1 = [5,0,15]
-bc1 = [10,0,15]
-c1 = [10,5,15]
-d1 = [10,15,15]
-e1 = [0,0,15]
+b1 = [-5,0,15]
+bc1 = [-10,0,15]
+c1 = [-10,5,15]
+d1 = [-10,15,15]
+e1 = [5,-10,15]
 desiredPath1 = [a1,b1,bc1,c1,d1,e1] #todo: assuming units are metres
 tdesiredPath = []
 desiredPathDJ = []

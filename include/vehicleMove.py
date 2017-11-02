@@ -93,7 +93,7 @@ def vehicleMoveDistanced(pp,speed):
 		print("Distance to target: ", remainingDistance,"target distance",targetDistance)
 		gVar.posHistory.append([gVar.UAVS.location.local_frame])
 		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame])
-		if remainingDistance <= targetDistance * 0.01:  # Just below target, in case of undershoot.
+		if remainingDistance <= targetDistance * 0.01 or remainingDistance <= 1:  # Just below target, in case of undershoot.
 			print("Reached target")
 			break
 		time.sleep(0.5)
@@ -126,7 +126,7 @@ def vehicleMoveDistanceMav(pp,speed):
 		print("Distance to target: ", remainingDistance)
 		gVar.posHistory.append([gVar.UAVS.location.local_frame])
 		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame])
-		if remainingDistance <= targetDistance * 0.01:  # Just below target, in case of undershoot.
+		if remainingDistance <= targetDistance * 0.01 or remainingDistance <= 1:  # Just below target, in case of undershoot.
 			print("Reached target")
 			break
 		time.sleep(0.5)

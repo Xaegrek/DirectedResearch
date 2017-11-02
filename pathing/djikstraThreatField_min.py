@@ -215,7 +215,7 @@ def pathingBoundaries(N_G, threat_value_true): #todo create version which connec
 def pathToCoordinates(path,gridPoints):
 	pathCoordinates = []
 	for i in path:	#todo make sure these axises aren't switched
-		x = i%gridPoints
+		x = i%gridPoints*-1
 		y = int(i/gridPoints)
 		coord = [x,y]
 		pathCoordinates.append(coord)
@@ -237,5 +237,5 @@ def coorDjik(N_G):
 	coor = pathToCoordinates(p,N_G)
 	return coor
 
-# c = coorDjik(5)
+# c = coorDjik(10)
 # print(c)
