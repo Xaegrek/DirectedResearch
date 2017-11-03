@@ -115,7 +115,8 @@ def userInput():
 		print("planning path")
 		tempP= dj.coorDjik(gVar.N_G)
 		for i in range(len(tempP)):
-			gVar.desiredPathDJ = tempP.append(gVar.altitudeTarget)[i]
+			gVar.desiredPathDJ[i] = tempP.append(gVar.altitudeTarget)
+		print('djalt:',gVar.desiredPathDJ,'example path',gVar.desiredPath1)
 	elif t4 == gVar.launchCode:
 		gVar.tdesiredPath = vehicleMove.simpleArcInterpolater(gVar.desiredPath1)
 
