@@ -172,11 +172,11 @@ def userInput():
 	#  #todo rewrite this for global Variable, so it write while it works
 	a= str(time.time())+'.txt'
 	f = open(a,'a')
-	f.write('desired path')
+	f.write('desired path\n')
 	f.write(str(desiredPath))
-	f.write('actual path')
+	f.write('\nactual path\n')
 	f.write(str(gVar.posHistory))
-	f.write('actual (gps) path')
+	f.write('\nactual (gps) path\n')
 	f.write(str(gVar.poshistoryGPS))
 	f.close()
 

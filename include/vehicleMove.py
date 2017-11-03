@@ -91,8 +91,8 @@ def vehicleMoveDistanced(pp,speed):
 	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
 		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)
 		print("Distance to target: ", remainingDistance,"target distance",targetDistance)
-		gVar.posHistory.append([gVar.UAVS.location.local_frame])
-		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame])
+		gVar.posHistory.append([gVar.UAVS.location.local_frame.north,gVar.UAVS.location.local_frame.east,gVar.UAVS.location.local_frame.down])
+		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame.lat,gVar.UAVS.location.global_relative_frame.lon,gVar.UAVS.location.global_relative_frame.alt])
 		if remainingDistance <= targetDistance * 0.01 or remainingDistance <= 1:  # Just below target, in case of undershoot.
 			print("Reached target")
 			break
@@ -124,8 +124,8 @@ def vehicleMoveDistanceMav(pp,speed):
 	while gVar.UAVS.mode.name == "GUIDED":  # Stop action if we are no longer in guided mode.
 		remainingDistance = get_distance_metres(gVar.UAVS.location.global_relative_frame, targetLocation)
 		print("Distance to target: ", remainingDistance)
-		gVar.posHistory.append([gVar.UAVS.location.local_frame])
-		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame])
+		gVar.posHistory.append([gVar.UAVS.location.local_frame.north,gVar.UAVS.location.local_frame.east,gVar.UAVS.location.local_frame.down])
+		gVar.poshistoryGPS.append([gVar.UAVS.location.global_relative_frame.lat,gVar.UAVS.location.global_relative_frame.lon,gVar.UAVS.location.global_relative_frame.alt])
 		if remainingDistance <= targetDistance * 0.01 or remainingDistance <= 1:  # Just below target, in case of undershoot.
 			print("Reached target")
 			break
