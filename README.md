@@ -1,4 +1,4 @@
-# MasterThesis
+# Research
 
 To enable autlogin (https://ubuntu-mate.community/t/enable-automatic-login-in-ubuntu-mate-16-04-for-raspberry-pi-3/5679/4)
 nano /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
